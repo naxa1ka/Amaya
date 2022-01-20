@@ -12,35 +12,47 @@
   
 1-й уровень - Легкий    
   
-![image](https://user-images.githubusercontent.com/36508387/121701003-ab545e80-cafa-11eb-821a-1e480a60ecfe.png)    
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 2-й уровень - Средний  
   
-![image](https://user-images.githubusercontent.com/36508387/121701161-d343c200-cafa-11eb-91f1-ff08634247dc.png)    
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p> 
   
 3-й уровень - Тяжелый  
   
-![image](https://user-images.githubusercontent.com/36508387/121701236-e35ba180-cafa-11eb-8763-0c77a7e3bf45.png)    
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 * При запуске сцены:  
   
   1. Через bounce эффект появляются ячейки с объектами  
   2. Через **FadeIn** эффект появляется текст с заданием, выбрать правильный вариант ответа  
   
-![BounceEffect](https://user-images.githubusercontent.com/36508387/121702540-2d915280-cafc-11eb-951d-19473d39e883.gif)  
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 * При тапе на неправильный ответ:  
   
   1. Объект внутри карточки дергается туда-сюда (easeInBounce)  
   
-![easyInBounce](https://user-images.githubusercontent.com/36508387/121703540-261e7900-cafd-11eb-9290-1e358f186ada.gif)  
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 * При тапе на правильный ответ:  
   
   1. bounce объекта внутри карточки  
   2. Появляются партиклы звездочки  
   
-![RightAnswer](https://user-images.githubusercontent.com/36508387/121706102-81ea0180-caff-11eb-82f9-cbd1baae7b54.gif)    
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 * При окончании всех уровней:  
   
@@ -48,14 +60,18 @@
   2. Должно эффектом **FadeIn/FadeOut** появиться затемнение экрана, но она не должна перекрывать кнопку **Restart**  
   3. Все элементы в игре не должны быть кликабельны  
   
-![GameEnd](https://user-images.githubusercontent.com/36508387/121707321-a2ff2200-cb00-11eb-8ca8-d63313e5178f.gif)    
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p>
   
 * При нажатии кнопки **Restart**:    
   
   1. Должен через эффект **FadeIn/FadeOut** появиться загрузочный экран (черная текстура). Игровые объекты исчезают.
   2. Все должно начинаться с пункта /"При запуске сцены/"
   
-![RestartGame](https://user-images.githubusercontent.com/36508387/121709008-4b61b600-cb02-11eb-9a4c-1bb4045f6cb8.gif)  
+<p align="left">
+  <img src="Demo/gameplay.gif" alt="gameplay" />
+</p> 
   
 ### Условия генерации данных    
   
