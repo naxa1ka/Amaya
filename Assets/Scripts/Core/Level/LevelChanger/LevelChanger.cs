@@ -1,22 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private LevelChangerView _levelChangerView;
-    [Space]
-    [SerializeField] private GameFieldInstaller _gameFieldInstaller;
+    [Space] [SerializeField] private GameFieldInstaller _gameFieldInstaller;
     [SerializeField] private LevelAnswerInstaller _levelAnswerInstaller;
-    [Space]
-    [SerializeField] private MonoBehaviour _dataProvider;
-    [SerializeField] private MonoBehaviour _input;
-    
-    private IInput Input => (IInput) _input;
-    private ILevelDataProvider DataProvider => (ILevelDataProvider)_dataProvider;
+
+    private ILevelDataProvider _dataProvider;
+    private IInput _input;
 
     private IReadOnlyList<LevelData> _levelsData;
     private int _currentLevel;
 
+    [Inject]
+    private void Constructor(IInput input, ILevelDataProvider levelDataProvider)
+    {
+        _input = input;
+        _dataProvider = levelDataProvider;
+    }
+    
     public void LoadFirstLevel()
     {
         _currentLevel = 0;
@@ -32,38 +36,23 @@ public class LevelChanger : MonoBehaviour
         return true;
     }
 
-    private void OnValidate()
-    {
-        if (_input is IInput == false)
-        {
-            Debug.LogError(_input.name + " needs to implement " + nameof(IInput));
-            _input = null;
-        }
-        
-        if (_dataProvider is ILevelDataProvider == false)
-        {
-            Debug.LogError(_dataProvider.name + " needs to implement " + nameof(ILevelDataProvider));
-            _dataProvider = null;
-        }
-    }
-
     private async void AnimateLoad()
     {
-        Input.IsEnabled = false;
+        _input.IsEnabled = false;
         await _levelChangerView.Init();
-        Input.IsEnabled = true;
+        _input.IsEnabled = true;
     }
 
     private void Load()
     {
         if (_levelsData == null)
         {
-            _levelsData = DataProvider.LevelData;
+            _levelsData = _dataProvider.LevelData;
         }
 
         var levelData = _levelsData[_currentLevel];
         _currentLevel++;
-        
+
         Init(levelData);
     }
 
@@ -72,7 +61,7 @@ public class LevelChanger : MonoBehaviour
         _levelAnswerInstaller.Dispose();
         _levelChangerView.Dispose();
     }
-    
+
     private void Init(LevelData levelData)
     {
         _gameFieldInstaller.Init(levelData);

@@ -27,12 +27,9 @@ public class LevelAnswerInstaller : MonoBehaviour
     {
         List<string> availableAnswers = new List<string>();
         
-        foreach (var cardBundleData in levelData.CardBundleData)
+        foreach (var cardData in levelData)
         {
-            foreach (var cardData in cardBundleData.CardData)
-            {
-                availableAnswers.Add(cardData.Identifier);
-            }
+            availableAnswers.Add(cardData.Identifier);
         }
 
         return availableAnswers;

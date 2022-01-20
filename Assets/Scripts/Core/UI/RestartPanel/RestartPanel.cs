@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class RestartPanel : MonoBehaviour
 {
     [SerializeField] private RestartPanelView _restartPanelView;
     [SerializeField] private SceneLoaderView _sceneLoaderView;
-    [SerializeField] private MonoBehaviour _input;
     [SerializeField] private LevelChanger _levelChanger;
+
+    [Inject]
+    private void Constructor(IInput input)
+    {
+        _input = input;
+    }
     
-    private IInput Input => (IInput)_input;
+    private IInput _input;
     
     public void Open()
     {
         _restartPanelView.FadeIn();
-        Input.IsEnabled = false;
-    }
-
-    private void OnValidate()
-    {
-        if (_input is IInput == false)
-        {
-            Debug.LogError(_input.name + " needs to implement " + nameof(IInput));
-            _input = null;
-        }
+        _input.IsEnabled = false;
     }
 
     private void OnEnable()

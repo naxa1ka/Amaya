@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class GameCycle : MonoBehaviour
 {
     [SerializeField] private LevelChanger _levelChanger;
     [SerializeField] private CardClickHandler _cardClick;
     [SerializeField] private RestartPanel _restartPanel;
-    [SerializeField] private MonoBehaviour _input;
-    
-    private IInput Input => (IInput) _input;
-    
-    private void OnValidate()
-    {
-        if (_input is IInput)
-            return;
 
-        Debug.LogError(_input.name + " needs to implement " + nameof(IInput));
-        _input = null;
+    private IInput _input;
+
+    [Inject]
+    private void Constructor(IInput input)
+    {
+        _input = input;
     }
-    
+
     private void OnEnable()
     {
         _cardClick.CorrectlyAnswerClicked += OnCorrectlyAnswerClicked;
@@ -32,9 +29,9 @@ public class GameCycle : MonoBehaviour
 
     private async void OnCorrectlyAnswerClicked(Card card)
     {
-        Input.IsEnabled = false;
+        _input.IsEnabled = false;
         await Task.Delay(TimeSpan.FromSeconds(card.CardView.CorrectlyAnswerAnimationDuration));
-        Input.IsEnabled = true;
+        _input.IsEnabled = true;
         
         if (_levelChanger.MoveNextLevel() == false)
         {

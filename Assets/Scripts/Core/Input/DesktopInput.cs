@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
-public class DesktopInput : MonoBehaviour, IInput
+public class DesktopInput : IInput, ITickable
 {
     private const int LeftKeyMouse = 0;
 
     public event Action<Vector3> Clicked;
     public bool IsEnabled { get; set; }
-
-    private void Update()
+    
+    public void Tick()
     {
         if (IsEnabled == false) return;
         

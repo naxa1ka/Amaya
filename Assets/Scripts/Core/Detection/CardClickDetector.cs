@@ -1,32 +1,25 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class CardClickDetector : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviour _input;
     [SerializeField] private CardEvent _clicked;
 
     private Camera _camera;
-    private IInput Input => (IInput) _input;
-    
-    private void OnValidate()
+    private IInput _input;
+
+    [Inject]
+    private void Constructor(Camera cam, IInput input)
     {
-        if (_input is IInput)
-            return;
-
-        Debug.LogError(_input.name + " needs to implement " + nameof(IInput));
-        _input = null;
+        _camera = cam;
+        _input = input;
     }
-
+    
     private void OnEnable()
     {
-        Input.Clicked += OnClick;
-    }
-
-    private void Start()
-    {
-        _camera = Camera.main;
+        _input.Clicked += OnClick;
     }
 
     private void OnClick(Vector3 position)
@@ -45,7 +38,7 @@ public class CardClickDetector : MonoBehaviour
     
     private void OnDisable()
     {
-        Input.Clicked -= OnClick;
+        _input.Clicked -= OnClick;
     }
 }
 
