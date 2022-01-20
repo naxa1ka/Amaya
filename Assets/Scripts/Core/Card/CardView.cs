@@ -17,6 +17,8 @@ public class ScaleSettings
 
 public class CardView : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer _content;
+    [SerializeField] private SpriteRenderer _background;
     [Header("Wrong settings")]
     [SerializeField] private int _vibrationWrong;
     [SerializeField] private ScaleSettings _wrongSettings;
@@ -28,24 +30,25 @@ public class CardView : MonoBehaviour
     [SerializeField] private ScaleSettings _appearanceSettings;
 
     private Vector3 _initialScale;
-    private GameObject _target;
+    private GameObject Target => _content.gameObject;
     
     public float CorrectlyAnswerAnimation => _correctlySettings.Duration + _particleSystem.main.duration;
     public float AppearanceAnimationDuration => _appearanceSettings.Duration;
 
-    public void Init(GameObject target)
+    public void Init(CardData cardData)
     {
-        _target = target;
-        _initialScale = target.transform.localScale;
+        _initialScale = Target.transform.localScale;
+        _content.sprite = cardData.Sprite;
+        _background.color = cardData.BackgroundColor;
     }
 
     public void PlayWrongAnswerAnimation()
     {
         var settings = _wrongSettings;
         
-        _target.transform.DORewind(false);
+        Target.transform.DORewind(false);
 
-        _target.transform
+        Target.transform
             .DOShakePosition(settings.Duration, settings.Strength, _vibrationWrong, 0)
             .SetEase(settings.Ease);
     }
@@ -54,11 +57,11 @@ public class CardView : MonoBehaviour
     {
         var settings = _correctlySettings;
         
-        _target.transform
+        Target.transform
             .DOScale(settings.Strength, settings.Duration)
             .SetEase(settings.Ease)
             .OnComplete(
-                () => _target.transform.DOScale(_initialScale, settings.Duration)
+                () => Target.transform.DOScale(_initialScale, settings.Duration)
             );
 
         this.DelayAction(

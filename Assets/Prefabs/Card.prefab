@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050f7f2956ab0b94cb4065e2bfb3a218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _content: {fileID: 656846753114652133}
 --- !u!61 &656846752802017202
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f401093623641daa4df42608d37aa49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _content: {fileID: 656846753114652133}
+  _background: {fileID: 656846752802017164}
   _vibrationWrong: 20
   _wrongSettings:
     _duration: 0.25

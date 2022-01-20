@@ -17,8 +17,9 @@ public class CardBundleDataEditor : Editor
                 EditorGUILayout.BeginVertical("box");
 
                 var elementAtIndex = array.GetArrayElementAtIndex(i);
-
+                
                 DrawSprite(elementAtIndex);
+                DrawColor(elementAtIndex);
                 DrawId(elementAtIndex);
 
                 if (GUILayout.Button("Удалить элемент"))
@@ -49,6 +50,12 @@ public class CardBundleDataEditor : Editor
         var sprite = elementAtIndex.FindPropertyRelative("_sprite");
         sprite.objectReferenceValue = (Sprite)EditorGUILayout.ObjectField("Картинка",
             sprite.objectReferenceValue, typeof(Sprite), false);
+    }
+
+    private void DrawColor(SerializedProperty elementAtIndex)
+    {
+        var bg = elementAtIndex.FindPropertyRelative("_backgroundColor");
+        bg.colorValue = EditorGUILayout.ColorField("Задний фон", bg.colorValue);
     }
 
     private static void DrawId(SerializedProperty elementAtIndex)

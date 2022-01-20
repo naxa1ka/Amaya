@@ -3,8 +3,6 @@
 [RequireComponent(typeof(CardView))]
 public class Card : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _content;
-
     private string _identifier;
     private CardView _cardView;
     
@@ -15,9 +13,8 @@ public class Card : MonoBehaviour
     public void Init(CardData cardData)
     {
         _identifier = cardData.Identifier;
-        _content.sprite = cardData.Sprite;
-        
-        _cardView.Init(_content.gameObject);
+
+        _cardView.Init(cardData);
     }
 
     public void Hide()
