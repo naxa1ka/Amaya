@@ -1,4 +1,4 @@
-# AmayaSoftTest  
+# AmayaSoft 
   
 **Тестовое задание на Unity Developer в компанию AmayaSoft**  
   
@@ -34,7 +34,7 @@
   2. Через **FadeIn** эффект появляется текст с заданием, выбрать правильный вариант ответа  
   
 <p align="left">
-  <img src="Demo/start.gif" alt="start" />
+  <img src="Demo/start.gif" alt="start" width ="750" height="440"/>
 </p>
   
 * При тапе на неправильный ответ:  
@@ -42,7 +42,7 @@
   1. Объект внутри карточки дергается туда-сюда (easeInBounce)  
   
 <p align="left">
-  <img src="Demo/wrong.gif" alt="wrong" />
+  <img src="Demo/wrong.gif" alt="wrong" width ="750" height="440"/>
 </p>
   
 * При тапе на правильный ответ:  
@@ -51,7 +51,7 @@
   2. Появляются партиклы звездочки  
   
 <p align="left">
-  <img src="Demo/correct.gif" alt="correct" />
+  <img src="Demo/correct.gif" alt="correct" width ="750" height="440"/>
 </p>
   
 * При окончании всех уровней:  
@@ -61,7 +61,7 @@
   3. Все элементы в игре не должны быть кликабельны  
   
 <p align="left">
-  <img src="Demo/restart.gif" alt="restart" />
+  <img src="Demo/restart.gif" alt="restart" width ="750" height="440"/>
 </p>
   
 * При нажатии кнопки **Restart**:    
@@ -70,7 +70,7 @@
   2. Все должно начинаться с пункта /"При запуске сцены/"
   
 <p align="left">
-  <img src="Demo/reload.gif" alt="reload" />
+  <img src="Demo/reload.gif" alt="reload" width ="750" height="440" />
 </p> 
   
 ### Условия генерации данных    
