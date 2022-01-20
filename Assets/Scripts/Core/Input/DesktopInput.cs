@@ -10,10 +10,7 @@ public class DesktopInput : MonoBehaviour, IInput
 
     private void Update()
     {
-        if (IsEnabled == false)
-        {
-            return;
-        }
+        if (IsEnabled == false) return;
         
         if (Input.GetMouseButtonDown(LeftKeyMouse))
         {

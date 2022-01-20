@@ -62,11 +62,14 @@ public class LevelChanger : MonoBehaviour
             _levelsData = DataProvider.LevelData;
         }
 
-        Debug.Log(_currentLevel);
-        
         var levelData = _levelsData[_currentLevel];
-
         _currentLevel++;
+        
+        Init(levelData);
+    }
+
+    private void Init(LevelData levelData)
+    {
         _gameFieldInstaller.Init(levelData);
         _levelAnswerInstaller.Init(levelData);
     }

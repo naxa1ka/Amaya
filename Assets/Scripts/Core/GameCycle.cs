@@ -5,16 +5,35 @@ using UnityEngine;
 public class GameCycle : MonoBehaviour
 {
     [SerializeField] private LevelChanger _levelChanger;
-    [SerializeField] private TileClickHandler _tileClick;
+    [SerializeField] private CardClickHandler _cardClick;
     [SerializeField] private RestartPanel _restartPanel;
+    [SerializeField] private MonoBehaviour _input;
+    private IInput Input => (IInput) _input;
+    
+    private void OnValidate()
+    {
+        if (_input is IInput)
+            return;
+
+        Debug.LogError(_input.name + " needs to implement " + nameof(IInput));
+        _input = null;
+    }
+    
     private void OnEnable()
     {
-        _tileClick.CorrectlyAnswerClicked += OnCorrectlyAnswerClicked;
+        _cardClick.CorrectlyAnswerClicked += OnCorrectlyAnswerClicked;
     }
 
-    private async void OnCorrectlyAnswerClicked(Tile tile)
+    private void Start()
     {
-        await Task.Delay(TimeSpan.FromSeconds(tile.CorrectlyAnswerAnimationDuration));
+        _levelChanger.LoadFirstLevel();
+    }
+
+    private async void OnCorrectlyAnswerClicked(Card card)
+    {
+        Input.IsEnabled = false;
+        await Task.Delay(TimeSpan.FromSeconds(card.CorrectlyAnswerAnimationDuration));
+        Input.IsEnabled = true;
         
         if (_levelChanger.MoveNextLevel() == false)
         {
@@ -22,12 +41,8 @@ public class GameCycle : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _levelChanger.LoadFirstLevel();
-    }
     private void OnDisable()
     {
-        _tileClick.CorrectlyAnswerClicked -= OnCorrectlyAnswerClicked;
+        _cardClick.CorrectlyAnswerClicked -= OnCorrectlyAnswerClicked;
     }
 }

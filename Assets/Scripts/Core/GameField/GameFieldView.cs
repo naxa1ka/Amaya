@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameFieldView : MonoBehaviour
 {
-    private List<Tile> _tiles;
+    private List<Card> _tiles;
 
-    public void Init(List<Tile> tiles)
+    public void Init(List<Card> tiles)
     {
         _tiles = tiles;
     }

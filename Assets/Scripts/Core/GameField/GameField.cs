@@ -1,13 +1,21 @@
+using UnityEditor;
 using UnityEngine;
 
 public class GameField : MonoBehaviour
 {
+    private enum OrderAccess
+    {
+        FromLeftDown,
+        FromLeftUp,
+        ShakeFromLeftUp
+    }
+
     [SerializeField] [Min(0)] private Vector2Int _gridSize;
     [SerializeField] private Vector2 _gridShift;
-    [Space] 
-    [SerializeField] private Vector2 _cellGap;
+    [Space] [SerializeField] private Vector2 _cellGap;
     [SerializeField] [Min(0)] private Vector2 _cellSize;
     [Space] [SerializeField] private Color _debugColor = Color.green;
+    [Space] [SerializeField] private OrderAccess _orderAccess;
 
     public void Init(int xSize, int ySize)
     {
@@ -15,6 +23,33 @@ public class GameField : MonoBehaviour
     }
 
     public Vector3 GetCenterOfCell(int x, int y)
+    {
+        Vector3 position;
+
+        if (_orderAccess == OrderAccess.FromLeftUp)
+        {
+            position = ComputeCenterOfCell(x, _gridSize.y - y - 1);
+        }
+        else if (_orderAccess == OrderAccess.ShakeFromLeftUp)
+        {
+            if (y % 2 == 1)
+            {
+                position = ComputeCenterOfCell(_gridSize.x - x - 1, _gridSize.y - y - 1);
+            }
+            else
+            {
+                position = ComputeCenterOfCell(x, _gridSize.y - y - 1);
+            }
+        }
+        else
+        {
+            position = ComputeCenterOfCell(x, y);
+        }
+
+        return position;
+    }
+
+    private Vector3 ComputeCenterOfCell(int x, int y)
     {
         var shiftX = ShiftX();
         var shiftY = ShiftY();
@@ -84,9 +119,9 @@ public class GameField : MonoBehaviour
 
                 Gizmos.DrawLine(leftUpPoint, leftDownPoint);
                 Gizmos.DrawLine(rightUpPoint, rightDownPoint);
+
+                Handles.Label(centerOfShiftedPosition, $"({x}, {y})");
             }
         }
     }
-
-    
 }

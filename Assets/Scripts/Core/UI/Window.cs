@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public abstract class Window : MonoBehaviour
@@ -9,25 +8,37 @@ public abstract class Window : MonoBehaviour
 
     private void Start()
     {
-        Reset();
+        LockPanel();
     }
 
     public void FadeOut()
     {
-        Reset();
-        _canvasGroup.DOFade(0f, _fadeDuration);
+        LockPanel();
+
+        Fade(0f);
     }
 
-    private void Reset()
+    public void FadeIn()
+    {
+        UnlockPanel();
+
+        Fade(1f);
+    }
+
+    private void Fade(float endValue)
+    {
+        _canvasGroup.DOFade(endValue, _fadeDuration);
+    }
+
+    private void LockPanel()
     {
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
     }
 
-    public void FadeIn()
+    private void UnlockPanel()
     {
         _canvasGroup.interactable = true;
         _canvasGroup.blocksRaycasts = true;
-        _canvasGroup.DOFade(1f, _fadeDuration);
     }
 }

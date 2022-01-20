@@ -6,15 +6,15 @@ public class GameFieldSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _parent;
     [SerializeField] private GameField _gameField;
-    [SerializeField] private TileFactory _tileFactory;
+    [SerializeField] private CardFactory _cardFactory;
     
-    private List<Tile> _spawnedTiles;
+    private List<Card> _spawnedTiles;
 
-    public List<Tile> Init(LevelData levelData)
+    public List<Card> Init(LevelData levelData)
     {
         TryDispose();
         
-        _spawnedTiles = new List<Tile>();
+        _spawnedTiles = new List<Card>();
         
         var levelDataCardBundleData = levelData.CardBundleData;
 
@@ -23,7 +23,7 @@ public class GameFieldSpawner : MonoBehaviour
         
         _gameField.Init(maxX, maxY);
 
-        SpawnTiles(levelData, maxX, maxY);
+        SpawnTiles(levelData, maxX);
 
         return _spawnedTiles;
     }
@@ -38,17 +38,30 @@ public class GameFieldSpawner : MonoBehaviour
         }
     }
     
-    private void SpawnTiles(LevelData levelData, int maxX, int maxY)
+    private void SpawnTiles(LevelData levelData, int maxX)
     {
-        for (int row = 0; row < maxX; row++)
+        var x = 0;
+        var y = 0;
+        
+        using (var enumerator = levelData.GetEnumerator())
         {
-            for (int column = 0; column < maxY; column++)
+            while (enumerator.MoveNext())
             {
-                var centerOfCell = _gameField.GetCenterOfCell(column, row);
+                if (x == maxX)
+                {
+                    x = 0;
+                    y++;
+                }
 
-                var tile = _tileFactory.GetTile(levelData[row, column], centerOfCell, Quaternion.identity, _parent);
-                _spawnedTiles.Add(tile);
-            }
+                var cardData = enumerator.Current;
+
+                var centerOfCell = _gameField.GetCenterOfCell(x, y);
+
+                var card = _cardFactory.GetCard(cardData, centerOfCell, Quaternion.identity, _parent);
+                _spawnedTiles.Add(card);
+                
+                x++;
+            }  
         }
     }
 }
