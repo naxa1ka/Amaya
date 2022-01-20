@@ -5,5 +5,6 @@ using UnityEngine;
 public class CardBundleData : ScriptableObject
 {
     [SerializeField] private CardData[] _cardData;
+    
     public IReadOnlyList<CardData> CardData => _cardData;
 }
