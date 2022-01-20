@@ -67,6 +67,12 @@ public class LevelChanger : MonoBehaviour
         Init(levelData);
     }
 
+    public void Dispose()
+    {
+        _levelAnswerInstaller.Dispose();
+        _levelChangerView.Dispose();
+    }
+    
     private void Init(LevelData levelData)
     {
         _gameFieldInstaller.Init(levelData);

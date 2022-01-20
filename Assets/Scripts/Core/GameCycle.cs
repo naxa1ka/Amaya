@@ -24,6 +24,16 @@ public class GameCycle : MonoBehaviour
         _cardClick.CorrectlyAnswerClicked += OnCorrectlyAnswerClicked;
     }
 
+    public void OnRestartStarted()
+    {
+        _levelChanger.Dispose();
+    }
+
+    public void OnRestartEnded()
+    {
+        _levelChanger.LoadFirstLevel();
+    }
+
     private void Start()
     {
         _levelChanger.LoadFirstLevel();

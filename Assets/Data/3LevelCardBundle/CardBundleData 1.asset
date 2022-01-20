@@ -16,9 +16,12 @@ MonoBehaviour:
   - _identifier: P
     _sprite: {fileID: -4252152113809563852, guid: 69c082c17f2b3d542898b87d57486ace,
       type: 3}
+    _backgroundColor: {r: 0.8156863, g: 0.9411765, b: 1, a: 1}
   - _identifier: 2
     _sprite: {fileID: 1808195818850983521, guid: 5cbaeea6e5e1dd347a784a4c94ad671b,
       type: 3}
+    _backgroundColor: {r: 0.8352941, g: 1, b: 0.972549, a: 1}
   - _identifier: X
     _sprite: {fileID: 4461586319009975920, guid: 69c082c17f2b3d542898b87d57486ace,
       type: 3}
+    _backgroundColor: {r: 1, g: 0.9411765, b: 0.7764706, a: 1}

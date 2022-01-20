@@ -8,10 +8,15 @@ public class LevelChangerView : MonoBehaviour
 
     public async Task Init()
     {
-        _levelAnswerView.Hide();
-        _gameFieldView.Hide();
-
+        Dispose();
+        
         await _gameFieldView.PlayAppearanceAnimation();
         await _levelAnswerView.FadeIn();
+    }
+
+    public void Dispose()
+    {
+        _levelAnswerView.Hide();
+        _gameFieldView.Hide();
     }
 }

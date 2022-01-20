@@ -8,6 +8,11 @@ public class LevelAnswerInstaller : MonoBehaviour
 
     private readonly List<string> _pastAnswers = new List<string>();
 
+    public void Dispose()
+    {
+        _pastAnswers.Clear();
+    }
+    
     public void Init(LevelData levelData)
     {
         var allAnswers = AllAnswers(levelData);

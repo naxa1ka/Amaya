@@ -12,7 +12,7 @@ public class GameFieldSpawner : MonoBehaviour
 
     public List<Card> Init(LevelData levelData)
     {
-        TryDispose();
+        Dispose();
         
         _spawnedTiles = new List<Card>();
         
@@ -28,7 +28,7 @@ public class GameFieldSpawner : MonoBehaviour
         return _spawnedTiles;
     }
 
-    private void TryDispose()
+    private void Dispose()
     {
         if(_spawnedTiles == null) return;
 
@@ -37,7 +37,7 @@ public class GameFieldSpawner : MonoBehaviour
             Destroy(spawnedTile.gameObject);
         }
     }
-    
+
     private void SpawnTiles(LevelData levelData, int maxX)
     {
         var x = 0;

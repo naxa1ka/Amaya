@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading.Tasks;
+using UnityEngine;
 
 public class RestartPanel : MonoBehaviour
 {
     [SerializeField] private RestartPanelView _restartPanelView;
-    [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private SceneLoaderView _sceneLoaderView;
     [SerializeField] private MonoBehaviour _input;
+    [SerializeField] private GameCycle _gameCycle;
+    
     private IInput Input => (IInput)_input;
-
+    
     public void Open()
     {
         _restartPanelView.FadeIn();
@@ -27,14 +31,21 @@ public class RestartPanel : MonoBehaviour
         _restartPanelView.RestartClicked += OnRestartClicked;
     }
 
-    private void OnRestartClicked()
+    private async void OnRestartClicked()
     {
         _restartPanelView.FadeOut();
-        _sceneLoader.LoadMainScene();
+        
+        _sceneLoaderView.FadeIn();
+        await Task.Delay(TimeSpan.FromSeconds(_sceneLoaderView.Duration));
+        _gameCycle.OnRestartStarted();
+        
+        _sceneLoaderView.FadeOut();
+        await Task.Delay(TimeSpan.FromSeconds(_sceneLoaderView.Duration));
+        _gameCycle.OnRestartEnded();
     }
 
     private void OnDisable()
     {
-        _restartPanelView.RestartClicked += OnRestartClicked;
+        _restartPanelView.RestartClicked -= OnRestartClicked;
     }
 }
