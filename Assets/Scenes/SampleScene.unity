@@ -411,7 +411,7 @@ MonoBehaviour:
   _restartPanelView: {fileID: 387026593}
   _sceneLoaderView: {fileID: 1948161395}
   _input: {fileID: 1837277864}
-  _gameCycle: {fileID: 750545537}
+  _levelChanger: {fileID: 1974580904}
 --- !u!225 &387026595
 CanvasGroup:
   m_ObjectHideFlags: 0

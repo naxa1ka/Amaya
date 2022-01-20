@@ -8,6 +8,7 @@ public class GameCycle : MonoBehaviour
     [SerializeField] private CardClickHandler _cardClick;
     [SerializeField] private RestartPanel _restartPanel;
     [SerializeField] private MonoBehaviour _input;
+    
     private IInput Input => (IInput) _input;
     
     private void OnValidate()
@@ -22,16 +23,6 @@ public class GameCycle : MonoBehaviour
     private void OnEnable()
     {
         _cardClick.CorrectlyAnswerClicked += OnCorrectlyAnswerClicked;
-    }
-
-    public void OnRestartStarted()
-    {
-        _levelChanger.Dispose();
-    }
-
-    public void OnRestartEnded()
-    {
-        _levelChanger.LoadFirstLevel();
     }
 
     private void Start()
