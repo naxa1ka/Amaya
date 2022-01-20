@@ -1,35 +1,37 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 
+[Serializable]
+public class ScaleSettings
+{
+    [SerializeField] private float _duration = 0.25f;
+    [SerializeField] private Vector3 _strength = new Vector3(1f, 1f, 1f);
+    [SerializeField] private Ease _ease = Ease.InBounce;
+    
+    public float Duration => _duration;
+    public Vector3 Strength => _strength;
+    public Ease Ease => _ease;
+}
+
 public class CardView : MonoBehaviour
 {
-    [Header("Correctly animations paricles")]
+    [Header("Wrong settings")]
+    [SerializeField] private int _vibrationWrong;
+    [SerializeField] private ScaleSettings _wrongSettings;
+    [Header("Correctly settings")]
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private float _delaySpawnParticles;
-    [Space] 
-    [Header("Wrong animations")] 
-    [SerializeField] private float _durationWrong = 0.25f;
-    [SerializeField] private Vector3 _strengthWrong = new Vector3(1.2f, 0, 0);
-    [SerializeField] private int _vibrationWrong;
-    [SerializeField] private Ease _easeWrong = Ease.InBounce;
-    [Space] 
-    [Header("Correctly animations")]
-    [SerializeField] private float _durationCorrectly = 0.25f;
-    [SerializeField] private Vector3 _scaleCorrectly = new Vector3(1.2f, 1.2f, 1.2f);
-    [SerializeField] private Ease _easeCorrectly = Ease.InBounce;
-    [Space] 
-    [Header("Appearance animations")] 
-    [SerializeField] private float _appearanceDuration;
-    [SerializeField] private Vector3 _appearanceScale = Vector3.one;
-    [SerializeField] private Ease _appearanceEase;
-    
+    [SerializeField] private ScaleSettings _correctlySettings;
+    [Header("Appearance settings")]
+    [SerializeField] private ScaleSettings _appearanceSettings;
+
     private Vector3 _initialScale;
     private GameObject _target;
-
-
-    public float CorrectlyAnswerAnimation => _durationCorrectly + _particleSystem.main.duration;
-    public float AppearanceAnimationDuration => _appearanceDuration;
+    
+    public float CorrectlyAnswerAnimation => _correctlySettings.Duration + _particleSystem.main.duration;
+    public float AppearanceAnimationDuration => _appearanceSettings.Duration;
 
     public void Init(GameObject target)
     {
@@ -39,20 +41,24 @@ public class CardView : MonoBehaviour
 
     public void PlayWrongAnswerAnimation()
     {
+        var settings = _wrongSettings;
+        
         _target.transform.DORewind(false);
 
         _target.transform
-            .DOShakePosition(_durationWrong, _strengthWrong, _vibrationWrong)
-            .SetEase(_easeWrong);
+            .DOShakePosition(settings.Duration, settings.Strength, _vibrationWrong, 0)
+            .SetEase(settings.Ease);
     }
 
     public void PlayCorrectlyAnswerAnimation()
     {
+        var settings = _correctlySettings;
+        
         _target.transform
-            .DOScale(_scaleCorrectly, _durationCorrectly)
-            .SetEase(_easeCorrectly)
+            .DOScale(settings.Strength, settings.Duration)
+            .SetEase(settings.Ease)
             .OnComplete(
-                () => _target.transform.DOScale(_initialScale, _durationCorrectly)
+                () => _target.transform.DOScale(_initialScale, settings.Duration)
             );
 
         this.DelayAction(
@@ -63,8 +69,10 @@ public class CardView : MonoBehaviour
 
     public void PlayAppearanceAnimation(GameObject target)
     {
+        var settings = _appearanceSettings;
+        
         target.transform
-            .DOScale(_appearanceScale, _appearanceDuration)
-            .SetEase(_appearanceEase);
+            .DOScale(settings.Strength, settings.Duration)
+            .SetEase(settings.Ease);
     }
 }

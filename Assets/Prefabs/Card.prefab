@@ -136,18 +136,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f401093623641daa4df42608d37aa49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _vibrationWrong: 20
+  _wrongSettings:
+    _duration: 0.25
+    _strength: {x: 0.2, y: 0, z: 0}
+    _ease: 29
   _particleSystem: {fileID: 3540960734499634584, guid: 74459c80f3ab2ed4f8c31e3ce7ca5304,
     type: 3}
   _delaySpawnParticles: 0.2
-  _durationWrong: 0.25
-  _strengthWrong: {x: 0.2, y: 0, z: 0}
-  _vibrationWrong: 20
-  _easeWrong: 29
-  _durationCorrectly: 0.25
-  _scaleCorrectly: {x: 0, y: 0, z: 0}
-  _easeCorrectly: 29
-  _appearanceDuration: 0.35
-  _appearanceScale: {x: 1, y: 1, z: 1}
+  _correctlySettings:
+    _duration: 0.25
+    _strength: {x: 0, y: 0, z: 0}
+    _ease: 29
+  _appearanceSettings:
+    _duration: 0.35
+    _strength: {x: 1, y: 1, z: 1}
+    _ease: 29
 --- !u!1 &656846753114652139
 GameObject:
   m_ObjectHideFlags: 0
