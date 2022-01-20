@@ -11,8 +11,6 @@ public class LevelData : ScriptableObject, IEnumerable<CardData>
     public int SizeY => _cardBundleData.Length;
     public int SizeX => _cardBundleData.Select(cardBundleData => cardBundleData.CardData.Count).Min();
 
-    public CardData  this[int x, int y] => _cardBundleData[y].CardData[x];
-
     public IEnumerator<CardData> GetEnumerator()
     {
         foreach (var cardBundleData in _cardBundleData)

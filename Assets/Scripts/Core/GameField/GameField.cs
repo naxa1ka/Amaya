@@ -124,7 +124,7 @@ public class GameField : MonoBehaviour
                 Gizmos.DrawLine(leftUpPoint, leftDownPoint);
                 Gizmos.DrawLine(rightUpPoint, rightDownPoint);
 
-                Handles.Label(centerOfShiftedPosition, $"({x}, {y})");
+                Handles.Label(centerOfShiftedPosition + Vector3.down * 0.2f, $"({x}, {y})");
             }
         }
     }

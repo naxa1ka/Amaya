@@ -47,10 +47,10 @@ public class LevelChanger : MonoBehaviour
         {
             _levelsData = _dataProvider.LevelData;
         }
-        
-        _currentLevel++;
 
         Init(_levelsData[_currentLevel]);
+        
+        _currentLevel++;
     }
 
     public void Dispose()

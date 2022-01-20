@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFieldSpawner : MonoBehaviour
@@ -6,16 +7,16 @@ public class GameFieldSpawner : MonoBehaviour
     [SerializeField] private Transform _parent;
     [SerializeField] private GameField _gameField;
     [SerializeField] private CardFactory _cardFactory;
-    
+
     private List<Card> _spawnedTiles;
 
     public List<Card> Init(LevelData levelData)
     {
         Dispose();
-        
+
         _spawnedTiles = new List<Card>();
 
-        var maxX =  levelData.SizeX;
+        var maxX = levelData.SizeX;
         var maxY = levelData.SizeY;
 
         _gameField.Init(maxX, maxY);
@@ -27,7 +28,7 @@ public class GameFieldSpawner : MonoBehaviour
 
     private void Dispose()
     {
-        if(_spawnedTiles == null) return;
+        if (_spawnedTiles == null) return;
 
         foreach (var spawnedTile in _spawnedTiles)
         {
@@ -37,12 +38,25 @@ public class GameFieldSpawner : MonoBehaviour
 
     private void SpawnCards(LevelData levelData, int maxX, int maxY)
     {
-        for (int x = 0; x < maxX; x++)
+        int x = 0;
+        int y = 0;
+        
+        foreach (var cardData in levelData)
         {
-            for (int y = 0; y < maxY; y++)
+            if (x == maxX)
             {
-                Spawn(x, y, levelData[x,y]);
+                x = 0;
+                y++;
             }
+
+            if (y == maxY)
+            {
+                throw new ArgumentException("LevelData isn't correct");
+            }
+            
+            Spawn(x, y, cardData);
+            
+            x++;
         }
     }
 

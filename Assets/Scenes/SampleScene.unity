@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f478bb6e76425a547aa8a3383804a334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 3, y: 3}
+  _gridSize: {x: 3, y: 2}
   _gridShift: {x: 0, y: 0}
   _cellGap: {x: -0.05, y: -0.05}
   _cellSize: {x: 1, y: 1}
