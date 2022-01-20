@@ -16,14 +16,14 @@ public class LevelAnswerView : MonoBehaviour
         _textMeshProUGUI.text = $"{Template}{answer}";
     }
 
-    public void Hide()
-    {
-        _textMeshProUGUI.alpha = 0f;
-    }
-
-    public async Task FadeIn()
+    public async Task Show()
     {
         _textMeshProUGUI.DOFade(1f, _fadeDuration);
         await Task.Delay(TimeSpan.FromSeconds(_fadeDuration));
+    }
+
+    public void Hide()
+    {
+        _textMeshProUGUI.alpha = 0f;
     }
 }

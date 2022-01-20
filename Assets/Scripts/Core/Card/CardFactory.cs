@@ -13,12 +13,4 @@ public class CardFactory : MonoBehaviour
     {
         return Instantiate(_prefab, position, rotation, parent);
     }
-
-    public Card GetCard(CardData cardData, Vector3 position, Quaternion rotation, Transform parent = null)
-    {
-        var tile = GetCard(position, rotation, parent);
-        tile.Init(cardData);
-        
-        return tile;
-    }
 }

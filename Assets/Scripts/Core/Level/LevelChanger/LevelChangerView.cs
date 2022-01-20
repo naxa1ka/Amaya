@@ -10,8 +10,8 @@ public class LevelChangerView : MonoBehaviour
     {
         Dispose();
         
-        await _gameFieldView.PlayAppearanceAnimation();
-        await _levelAnswerView.FadeIn();
+        await _gameFieldView.Show();
+        await _levelAnswerView.Show();
     }
 
     public void Dispose()

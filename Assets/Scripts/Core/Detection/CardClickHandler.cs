@@ -9,15 +9,16 @@ public class CardClickHandler : MonoBehaviour
 
     public void OnClicked(Card card)
     {
+        var cardView = card.CardView;
         var isCorrectlyAnswer = _levelAnswer.IsCorrectlyAnswer(card.Identifier);
         if (isCorrectlyAnswer)
         {
-            card.PlayCorrectlyAnswerAnimation();
+            cardView.PlayCorrectlyAnswerAnimation();
             CorrectlyAnswerClicked?.Invoke(card);
         }
         else
         {
-            card.PlayWrongAnswerAnimation();
+            cardView.PlayWrongAnswerAnimation();
         }
     }
 }

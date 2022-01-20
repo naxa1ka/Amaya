@@ -33,7 +33,7 @@ public class GameCycle : MonoBehaviour
     private async void OnCorrectlyAnswerClicked(Card card)
     {
         Input.IsEnabled = false;
-        await Task.Delay(TimeSpan.FromSeconds(card.CorrectlyAnswerAnimationDuration));
+        await Task.Delay(TimeSpan.FromSeconds(card.CardView.CorrectlyAnswerAnimationDuration));
         Input.IsEnabled = true;
         
         if (_levelChanger.MoveNextLevel() == false)

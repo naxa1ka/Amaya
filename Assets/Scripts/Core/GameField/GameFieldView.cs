@@ -5,27 +5,29 @@ using UnityEngine;
 
 public class GameFieldView : MonoBehaviour
 {
-    private List<Card> _tiles;
+    private List<Card> _cards;
 
-    public void Init(List<Card> tiles)
+    public void Init(List<Card> cards)
     {
-        _tiles = tiles;
+        _cards = cards;
+    }
+
+    public async Task Show()
+    {
+        foreach (var card in _cards)
+        {
+            var cardView = card.CardView;
+            
+            cardView.PlayAppearanceAnimation();
+            await Task.Delay(TimeSpan.FromSeconds(cardView.AppearanceAnimationDuration));
+        }
     }
 
     public void Hide()
     {
-        foreach (var tile in _tiles)
+        foreach (var card in _cards)
         {
-            tile.Hide();
-        }
-    }
-
-    public async Task PlayAppearanceAnimation()
-    {
-        foreach (var tile in _tiles)
-        {
-            tile.PlayAppearanceAnimation();
-            await Task.Delay(TimeSpan.FromSeconds(tile.AppearanceAnimationDuration));
+            card.CardView.Hide();
         }
     }
 }

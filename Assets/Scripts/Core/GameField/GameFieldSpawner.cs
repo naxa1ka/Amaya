@@ -18,8 +18,8 @@ public class GameFieldSpawner : MonoBehaviour
         
         var levelDataCardBundleData = levelData.CardBundleData;
 
-        int maxY = levelDataCardBundleData.Count;
-        int maxX = levelDataCardBundleData.Select(cardBundleData => cardBundleData.CardData.Count).Max();
+        var maxY = levelDataCardBundleData.Count;
+        var maxX = levelDataCardBundleData.Select(cardBundleData => cardBundleData.CardData.Count).Max();
         
         _gameField.Init(maxX, maxY);
 
@@ -43,25 +43,22 @@ public class GameFieldSpawner : MonoBehaviour
         var x = 0;
         var y = 0;
         
-        using (var enumerator = levelData.GetEnumerator())
+        foreach (var cardData in levelData)
         {
-            while (enumerator.MoveNext())
+            if (x == maxX)
             {
-                if (x == maxX)
-                {
-                    x = 0;
-                    y++;
-                }
+                x = 0;
+                y++;
+            }
+            
+            var centerOfCell = _gameField.GetCenterOfCell(x, y);
 
-                var cardData = enumerator.Current;
-
-                var centerOfCell = _gameField.GetCenterOfCell(x, y);
-
-                var card = _cardFactory.GetCard(cardData, centerOfCell, Quaternion.identity, _parent);
-                _spawnedTiles.Add(card);
+            var card = _cardFactory.GetCard(centerOfCell, Quaternion.identity, _parent);
+            card.Init(cardData);
+            
+            _spawnedTiles.Add(card);
                 
-                x++;
-            }  
+            x++;
         }
     }
 }
