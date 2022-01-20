@@ -8,7 +8,8 @@ public class CardView : MonoBehaviour
     [Space]
     [Header("Wrong animations")] 
     [SerializeField] private float _durationWrong = 0.25f;
-    [SerializeField] private Vector3 _scaleWrong = new Vector3(1.2f, 1.2f, 1.2f);
+    [SerializeField] private Vector3 _strengthWrong = new Vector3(1.2f, 0, 0);
+    [SerializeField] private int _vibrationWrong;
     [SerializeField] private Ease _easeWrong = Ease.InBounce;
     [Space]
     [Header("Correctly animations")] 
@@ -22,6 +23,7 @@ public class CardView : MonoBehaviour
     
     private Vector3 _initialScale;
     private GameObject _target;
+    
 
     public float CorrectlyAnswerAnimation => _durationCorrectly + _particleSystem.main.duration;
     public float AppearanceAnimationDuration => _appearanceDuration;
@@ -35,13 +37,10 @@ public class CardView : MonoBehaviour
     public void PlayWrongAnswerAnimation()
     {
         _target.transform.DORewind(false);
-        
+
         _target.transform
-            .DOScale(_scaleWrong, _durationWrong)
-            .SetEase(_easeWrong)
-            .OnComplete(
-                () => _target.transform.DOScale(_initialScale, _durationWrong)
-            );
+            .DOShakePosition(_durationWrong, _strengthWrong, _vibrationWrong)
+            .SetEase(_easeWrong);
     }
 
     public void PlayCorrectlyAnswerAnimation()
