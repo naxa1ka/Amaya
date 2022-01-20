@@ -99,6 +99,7 @@ public class GameField : MonoBehaviour
         return gridYShift + gapYShift;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         for (int x = 0; x < _gridSize.x; x++)
@@ -127,4 +128,5 @@ public class GameField : MonoBehaviour
             }
         }
     }
+#endif
 }
