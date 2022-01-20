@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameFieldSpawner : MonoBehaviour
@@ -15,15 +14,13 @@ public class GameFieldSpawner : MonoBehaviour
         Dispose();
         
         _spawnedTiles = new List<Card>();
-        
-        var levelDataCardBundleData = levelData.CardBundleData;
 
-        var maxY = levelDataCardBundleData.Count;
-        var maxX = levelDataCardBundleData.Select(cardBundleData => cardBundleData.CardData.Count).Max();
-        
+        var maxX =  levelData.SizeX;
+        var maxY = levelData.SizeY;
+
         _gameField.Init(maxX, maxY);
 
-        SpawnTiles(levelData, maxX);
+        SpawnCards(levelData, maxX, maxY);
 
         return _spawnedTiles;
     }
@@ -38,27 +35,24 @@ public class GameFieldSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnTiles(LevelData levelData, int maxX)
+    private void SpawnCards(LevelData levelData, int maxX, int maxY)
     {
-        var x = 0;
-        var y = 0;
-        
-        foreach (var cardData in levelData)
+        for (int x = 0; x < maxX; x++)
         {
-            if (x == maxX)
+            for (int y = 0; y < maxY; y++)
             {
-                x = 0;
-                y++;
+                Spawn(x, y, levelData[x,y]);
             }
-            
-            var centerOfCell = _gameField.GetCenterOfCell(x, y);
-
-            var card = _cardFactory.GetCard(centerOfCell, Quaternion.identity, _parent);
-            card.Init(cardData);
-            
-            _spawnedTiles.Add(card);
-                
-            x++;
         }
+    }
+
+    private void Spawn(int x, int y, CardData cardData)
+    {
+        var centerOfCell = _gameField.GetCenterOfCell(x, y);
+
+        var card = _cardFactory.GetCard(centerOfCell, Quaternion.identity, _parent);
+        card.Init(cardData);
+
+        _spawnedTiles.Add(card);
     }
 }

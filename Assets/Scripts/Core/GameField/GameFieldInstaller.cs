@@ -7,7 +7,7 @@ public class GameFieldInstaller : MonoBehaviour
 
     public void Init(LevelData levelData)
     {
-        var tiles = _gameFieldSpawner.Init(levelData);
-        _gameFieldView.Init(tiles);
+        var cards = _gameFieldSpawner.Init(levelData);
+        _gameFieldView.Init(cards);
     }
 }

@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelData", menuName = "LevelData", order = 0)]
 public class LevelData : ScriptableObject, IEnumerable<CardData>
 {
     [SerializeField] private CardBundleData[] _cardBundleData;
-    public IReadOnlyList<CardBundleData> CardBundleData => _cardBundleData;
-    
+
+    public int SizeY => _cardBundleData.Length;
+    public int SizeX => _cardBundleData.Select(cardBundleData => cardBundleData.CardData.Count).Min();
+
+    public CardData  this[int x, int y] => _cardBundleData[y].CardData[x];
+
     public IEnumerator<CardData> GetEnumerator()
     {
         foreach (var cardBundleData in _cardBundleData)

@@ -29,14 +29,19 @@ public class GameCycle : MonoBehaviour
 
     private async void OnCorrectlyAnswerClicked(Card card)
     {
-        _input.IsEnabled = false;
-        await Task.Delay(TimeSpan.FromSeconds(card.CardView.CorrectlyAnswerAnimationDuration));
-        _input.IsEnabled = true;
-        
+        await WaitAnimation(card);
+
         if (_levelChanger.MoveNextLevel() == false)
         {
             _restartPanel.Open();
         }
+    }
+
+    private async Task WaitAnimation(Card card)
+    {
+        _input.IsEnabled = false;
+        await Task.Delay(TimeSpan.FromSeconds(card.CardView.CorrectlyAnswerAnimationDuration));
+        _input.IsEnabled = true;
     }
 
     private void OnDisable()

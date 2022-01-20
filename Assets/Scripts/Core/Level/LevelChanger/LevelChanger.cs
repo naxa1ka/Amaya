@@ -5,7 +5,8 @@ using Zenject;
 public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private LevelChangerView _levelChangerView;
-    [Space] [SerializeField] private GameFieldInstaller _gameFieldInstaller;
+    [Space] 
+    [SerializeField] private GameFieldInstaller _gameFieldInstaller;
     [SerializeField] private LevelAnswerInstaller _levelAnswerInstaller;
 
     private ILevelDataProvider _dataProvider;
@@ -17,7 +18,6 @@ public class LevelChanger : MonoBehaviour
     [Inject]
     private void Constructor(IInput input, ILevelDataProvider levelDataProvider)
     {
-        _input = input;
         _dataProvider = levelDataProvider;
     }
     
@@ -38,9 +38,7 @@ public class LevelChanger : MonoBehaviour
 
     private async void AnimateLoad()
     {
-        _input.IsEnabled = false;
         await _levelChangerView.Init();
-        _input.IsEnabled = true;
     }
 
     private void Load()
@@ -49,11 +47,10 @@ public class LevelChanger : MonoBehaviour
         {
             _levelsData = _dataProvider.LevelData;
         }
-
-        var levelData = _levelsData[_currentLevel];
+        
         _currentLevel++;
 
-        Init(levelData);
+        Init(_levelsData[_currentLevel]);
     }
 
     public void Dispose()

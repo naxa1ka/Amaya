@@ -25,14 +25,7 @@ public class LevelAnswerInstaller : MonoBehaviour
 
     private List<string> AllAnswers(LevelData levelData)
     {
-        List<string> availableAnswers = new List<string>();
-        
-        foreach (var cardData in levelData)
-        {
-            availableAnswers.Add(cardData.Identifier);
-        }
-
-        return availableAnswers;
+        return levelData.Select(cardData => cardData.Identifier).ToList();
     }
 
     private string SelectAnswer(List<string> list)

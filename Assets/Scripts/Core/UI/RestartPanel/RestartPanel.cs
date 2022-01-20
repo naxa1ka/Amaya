@@ -9,14 +9,14 @@ public class RestartPanel : MonoBehaviour
     [SerializeField] private SceneLoaderView _sceneLoaderView;
     [SerializeField] private LevelChanger _levelChanger;
 
+    private IInput _input;
+
     [Inject]
     private void Constructor(IInput input)
     {
         _input = input;
     }
-    
-    private IInput _input;
-    
+
     public void Open()
     {
         _restartPanelView.FadeIn();
@@ -32,13 +32,23 @@ public class RestartPanel : MonoBehaviour
     {
         _restartPanelView.FadeOut();
         
-        _sceneLoaderView.FadeIn();
-        await Task.Delay(TimeSpan.FromSeconds(_sceneLoaderView.Duration));
-        _levelChanger.Dispose();
-        
+        await Hide();
+
+        await Show();
+    }
+
+    private async Task Show()
+    {
         _sceneLoaderView.FadeOut();
         await Task.Delay(TimeSpan.FromSeconds(_sceneLoaderView.Duration));
         _levelChanger.LoadFirstLevel();
+    }
+
+    private async Task Hide()
+    {
+        _sceneLoaderView.FadeIn();
+        await Task.Delay(TimeSpan.FromSeconds(_sceneLoaderView.Duration));
+        _levelChanger.Dispose();
     }
 
     private void OnDisable()

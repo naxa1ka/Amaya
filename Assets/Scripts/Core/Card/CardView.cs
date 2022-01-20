@@ -30,10 +30,10 @@ public class CardView : MonoBehaviour
     [Header("Appearance settings")]
     [SerializeField] private ScaleSettings _appearanceSettings;
     
-    private GameObject Target => _content.gameObject;
-    
     public float CorrectlyAnswerAnimationDuration => _correctlySettings.Duration + _particleSystem.main.duration;
     public float AppearanceAnimationDuration => _appearanceSettings.Duration;
+    
+    private GameObject Target => _content.gameObject;
 
     public void Init(CardData cardData)
     {
