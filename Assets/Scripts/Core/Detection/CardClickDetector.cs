@@ -9,8 +9,7 @@ public class CardClickDetector : MonoBehaviour
 
     private Camera _camera;
     private IInput Input => (IInput) _input;
-
-
+    
     private void OnValidate()
     {
         if (_input is IInput)
@@ -43,6 +42,7 @@ public class CardClickDetector : MonoBehaviour
             }
         }
     }
+    
     private void OnDisable()
     {
         Input.Clicked -= OnClick;

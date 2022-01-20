@@ -9,14 +9,8 @@ public class Card : MonoBehaviour
     private CardView _cardView;
     
     public string Identifier => _identifier;
-
     public float CorrectlyAnswerAnimationDuration => _cardView.CorrectlyAnswerAnimation;
     public float AppearanceAnimationDuration => _cardView.AppearanceAnimationDuration;
-    
-    private void Awake()
-    {
-        _cardView = GetComponent<CardView>();
-    }
 
     public void Init(CardData cardData)
     {
@@ -30,7 +24,7 @@ public class Card : MonoBehaviour
     {
         transform.localScale = Vector3.zero;
     }
-    
+
     public void PlayWrongAnswerAnimation()
     {
         _cardView.PlayWrongAnswerAnimation();
@@ -44,5 +38,10 @@ public class Card : MonoBehaviour
     public void PlayAppearanceAnimation()
     {
         _cardView.PlayAppearanceAnimation(gameObject);
+    }
+
+    private void Awake()
+    {
+        _cardView = GetComponent<CardView>();
     }
 }

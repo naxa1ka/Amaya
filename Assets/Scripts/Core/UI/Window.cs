@@ -6,11 +6,6 @@ public abstract class Window : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _fadeDuration = 0.25f;
 
-    private void Start()
-    {
-        LockPanel();
-    }
-
     public void FadeOut()
     {
         LockPanel();
@@ -23,6 +18,11 @@ public abstract class Window : MonoBehaviour
         UnlockPanel();
 
         Fade(1f);
+    }
+
+    private void Start()
+    {
+        LockPanel();
     }
 
     private void Fade(float endValue)

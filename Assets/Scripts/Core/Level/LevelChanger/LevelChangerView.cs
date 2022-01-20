@@ -1,18 +1,17 @@
-﻿
-    using System.Threading.Tasks;
-    using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
-    public class LevelChangerView : MonoBehaviour
+public class LevelChangerView : MonoBehaviour
+{
+    [SerializeField] private LevelAnswerView _levelAnswerView;
+    [SerializeField] private GameFieldView _gameFieldView;
+
+    public async Task Init()
     {
-        [SerializeField] private LevelAnswerView _levelAnswerView;
-        [SerializeField] private GameFieldView _gameFieldView;
+        _levelAnswerView.Hide();
+        _gameFieldView.Hide();
 
-        public async Task Init()
-        {
-            _levelAnswerView.Hide();
-            _gameFieldView.Hide();
-
-            await _gameFieldView.PlayAppearanceAnimation();
-            await  _levelAnswerView.FadeIn();
-        }
+        await _gameFieldView.PlayAppearanceAnimation();
+        await _levelAnswerView.FadeIn();
     }
+}

@@ -21,7 +21,6 @@ public class CardView : MonoBehaviour
     [SerializeField] private Vector3 _appearanceScale = Vector3.one;
     
     private Vector3 _initialScale;
-    
     private GameObject _target;
 
     public float CorrectlyAnswerAnimation => _durationCorrectly + _particleSystem.main.duration;

@@ -7,15 +7,18 @@ public class GameField : MonoBehaviour
     {
         FromLeftDown,
         FromLeftUp,
-        ShakeFromLeftUp
+        SnakeFromLeftUp
     }
 
     [SerializeField] [Min(0)] private Vector2Int _gridSize;
     [SerializeField] private Vector2 _gridShift;
-    [Space] [SerializeField] private Vector2 _cellGap;
+    [Space] 
+    [SerializeField] private Vector2 _cellGap;
     [SerializeField] [Min(0)] private Vector2 _cellSize;
-    [Space] [SerializeField] private Color _debugColor = Color.green;
-    [Space] [SerializeField] private OrderAccess _orderAccess;
+    [Space] 
+    [SerializeField] private Color _debugColor = Color.green;
+    [Space] 
+    [SerializeField] private OrderAccess _orderAccess;
 
     public void Init(int xSize, int ySize)
     {
@@ -30,7 +33,7 @@ public class GameField : MonoBehaviour
         {
             position = ComputeCenterOfCell(x, _gridSize.y - y - 1);
         }
-        else if (_orderAccess == OrderAccess.ShakeFromLeftUp)
+        else if (_orderAccess == OrderAccess.SnakeFromLeftUp)
         {
             if (y % 2 == 1)
             {

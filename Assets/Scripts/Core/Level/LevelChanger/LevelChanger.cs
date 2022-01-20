@@ -12,12 +12,11 @@ public class LevelChanger : MonoBehaviour
     [SerializeField] private MonoBehaviour _input;
     
     private IInput Input => (IInput) _input;
-    
     private ILevelDataProvider DataProvider => (ILevelDataProvider)_dataProvider;
-    private int _currentLevel;
+
     private IReadOnlyList<LevelData> _levelsData;
-    
-    
+    private int _currentLevel;
+
     public void LoadFirstLevel()
     {
         _currentLevel = 0;
