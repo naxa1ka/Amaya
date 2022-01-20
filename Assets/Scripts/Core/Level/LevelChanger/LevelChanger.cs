@@ -4,13 +4,13 @@ using UnityEngine;
 public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private LevelChangerView _levelChangerView;
-
+    [Space]
     [SerializeField] private GameFieldInstaller _gameFieldInstaller;
     [SerializeField] private LevelAnswerInstaller _levelAnswerInstaller;
-
+    [Space]
     [SerializeField] private MonoBehaviour _dataProvider;
-
     [SerializeField] private MonoBehaviour _input;
+    
     private IInput Input => (IInput) _input;
     
     private ILevelDataProvider DataProvider => (ILevelDataProvider)_dataProvider;
