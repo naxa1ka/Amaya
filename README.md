@@ -13,19 +13,19 @@
 1-й уровень - Легкий    
   
 <p align="left">
-  <img src="Demo/1level.png" alt="1level.png" />
+  <img src="Demo/1level.png" alt="1level.png" width ="440" height="750" />
 </p>
   
 2-й уровень - Средний  
   
 <p align="left">
-  <img src="Demo/2level.png" alt="2level.png" />
+  <img src="Demo/2level.png" alt="2level.png" width ="440" height="750" />
 </p> 
   
 3-й уровень - Тяжелый  
   
 <p align="left">
-  <img src="Demo/3level.png" alt="3level" />
+  <img src="Demo/3level.png" alt="3level" width ="440" height="750"/>
 </p>
   
 * При запуске сцены:  
